@@ -2,42 +2,32 @@
 //  ViewController.swift
 //  dcrdminer
 //
-//  Created by 渡部郷太 on 2018/10/20.
+//  Created by Kyota Watanabe on 2018/10/20.
 //  Copyright © 2018 watanabe kyota. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController, StratumDelegate {
-
+class ViewController: UIViewController, PoolDelegate, MinerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.stratum = Stratum(host: "dcr-as.coinmine.pl", port: 2222, delegate: self)
-        
+        self.pool = Pool(host: "dcr-as.coinmine.pl", port: 2222, workerName: "bororon.worker", password: "pass")
+        self.miner = Miner(id: 1)
+        self.miner.delegate = self
+        self.pool.subscribe(subscriber: self)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    func receiveData(dataString: String) {
-        print(dataString)
+    
+    func receiveJob(job: PoolJob) {
+        self.miner.mineHash(job: job)
     }
     
-    func receiveMessage(message: SubscriveResult) {
-        print(message)
-    }
-    
-    func receiveMessage(message: NotifyMethod) {
-        print(message)
-    }
-    
-    func receiveMessage(message: SetDifficultyMethod) {
-        print(message)
-    }
-    
-    var stratum: Stratum!
+    var pool: Pool!
+    var miner: Miner!
 }
 

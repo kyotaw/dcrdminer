@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		28BC4409D5C4864B5171A727 /* Pods_dcrdminerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E062445E34271EE97494EA88 /* Pods_dcrdminerTests.framework */; };
+		B86A5B3B21856A1B002CA915 /* PoolJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86A5B3A21856A1B002CA915 /* PoolJob.swift */; };
+		B86A5B3D218C7467002CA915 /* BlockHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86A5B3C218C7467002CA915 /* BlockHeader.swift */; };
+		B86A5B3F218CA02C002CA915 /* Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86A5B3E218CA02C002CA915 /* Hex.swift */; };
+		B86A5B41218D58E8002CA915 /* Miner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86A5B40218D58E8002CA915 /* Miner.swift */; };
+		B86A5B43218D594A002CA915 /* Work.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86A5B42218D594A002CA915 /* Work.swift */; };
 		B8A97761217B79DD003FBA72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A97760217B79DD003FBA72 /* AppDelegate.swift */; };
 		B8A97763217B79DD003FBA72 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A97762217B79DD003FBA72 /* ViewController.swift */; };
 		B8A97766217B79DD003FBA72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8A97764217B79DD003FBA72 /* Main.storyboard */; };
@@ -15,8 +20,10 @@
 		B8A9776B217B79DF003FBA72 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8A97769217B79DF003FBA72 /* LaunchScreen.storyboard */; };
 		B8A97776217B79E0003FBA72 /* dcrdminerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A97775217B79E0003FBA72 /* dcrdminerTests.swift */; };
 		B8A97781217B79E0003FBA72 /* dcrdminerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A97780217B79E0003FBA72 /* dcrdminerUITests.swift */; };
-		B8A9778F217B7AE5003FBA72 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A9778E217B7AE5003FBA72 /* Socket.swift */; };
 		B8A97791217C1E00003FBA72 /* Stratum.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A97790217C1E00003FBA72 /* Stratum.swift */; };
+		B8D278AD218D702D00B6F54C /* Pool.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D278AC218D702D00B6F54C /* Pool.swift */; };
+		B8D278AF218DDC6B00B6F54C /* NonceCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D278AE218DDC6B00B6F54C /* NonceCounter.swift */; };
+		B8D278B1218DE3E700B6F54C /* Blake256.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D278B0218DE3E700B6F54C /* Blake256.swift */; };
 		D0DCE488A241E89B65D10E32 /* Pods_dcrdminer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A7AA2382DD43A591851F5B /* Pods_dcrdminer.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +48,11 @@
 		49D6B26BE0859ACE1924239D /* Pods-dcrdminerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dcrdminerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-dcrdminerTests/Pods-dcrdminerTests.release.xcconfig"; sourceTree = "<group>"; };
 		686E6C25493A7D03AC27684E /* Pods-dcrdminerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dcrdminerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-dcrdminerTests/Pods-dcrdminerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		73A7AA2382DD43A591851F5B /* Pods_dcrdminer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dcrdminer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B86A5B3A21856A1B002CA915 /* PoolJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoolJob.swift; sourceTree = "<group>"; };
+		B86A5B3C218C7467002CA915 /* BlockHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockHeader.swift; sourceTree = "<group>"; };
+		B86A5B3E218CA02C002CA915 /* Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hex.swift; sourceTree = "<group>"; };
+		B86A5B40218D58E8002CA915 /* Miner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Miner.swift; sourceTree = "<group>"; };
+		B86A5B42218D594A002CA915 /* Work.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Work.swift; sourceTree = "<group>"; };
 		B8A9775D217B79DD003FBA72 /* dcrdminer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dcrdminer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8A97760217B79DD003FBA72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8A97762217B79DD003FBA72 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,8 +66,10 @@
 		B8A9777C217B79E0003FBA72 /* dcrdminerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dcrdminerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8A97780217B79E0003FBA72 /* dcrdminerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dcrdminerUITests.swift; sourceTree = "<group>"; };
 		B8A97782217B79E0003FBA72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B8A9778E217B7AE5003FBA72 /* Socket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
 		B8A97790217C1E00003FBA72 /* Stratum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stratum.swift; sourceTree = "<group>"; };
+		B8D278AC218D702D00B6F54C /* Pool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pool.swift; sourceTree = "<group>"; };
+		B8D278AE218DDC6B00B6F54C /* NonceCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonceCounter.swift; sourceTree = "<group>"; };
+		B8D278B0218DE3E700B6F54C /* Blake256.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blake256.swift; sourceTree = "<group>"; };
 		CC86A1F40666D7F0FD24D9B3 /* Pods-dcrdminer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dcrdminer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-dcrdminer/Pods-dcrdminer.debug.xcconfig"; sourceTree = "<group>"; };
 		CDDD178D02BBA14003C61A58 /* Pods-dcrdminer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dcrdminer.release.xcconfig"; path = "Pods/Target Support Files/Pods-dcrdminer/Pods-dcrdminer.release.xcconfig"; sourceTree = "<group>"; };
 		E062445E34271EE97494EA88 /* Pods_dcrdminerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dcrdminerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,8 +153,15 @@
 				B8A97767217B79DF003FBA72 /* Assets.xcassets */,
 				B8A97769217B79DF003FBA72 /* LaunchScreen.storyboard */,
 				B8A9776C217B79DF003FBA72 /* Info.plist */,
-				B8A9778E217B7AE5003FBA72 /* Socket.swift */,
 				B8A97790217C1E00003FBA72 /* Stratum.swift */,
+				B86A5B3A21856A1B002CA915 /* PoolJob.swift */,
+				B86A5B3C218C7467002CA915 /* BlockHeader.swift */,
+				B86A5B3E218CA02C002CA915 /* Hex.swift */,
+				B86A5B40218D58E8002CA915 /* Miner.swift */,
+				B86A5B42218D594A002CA915 /* Work.swift */,
+				B8D278AC218D702D00B6F54C /* Pool.swift */,
+				B8D278AE218DDC6B00B6F54C /* NonceCounter.swift */,
+				B8D278B0218DE3E700B6F54C /* Blake256.swift */,
 			);
 			path = dcrdminer;
 			sourceTree = "<group>";
@@ -376,10 +397,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B86A5B43218D594A002CA915 /* Work.swift in Sources */,
 				B8A97763217B79DD003FBA72 /* ViewController.swift in Sources */,
+				B8D278B1218DE3E700B6F54C /* Blake256.swift in Sources */,
+				B86A5B41218D58E8002CA915 /* Miner.swift in Sources */,
 				B8A97761217B79DD003FBA72 /* AppDelegate.swift in Sources */,
-				B8A9778F217B7AE5003FBA72 /* Socket.swift in Sources */,
+				B86A5B3B21856A1B002CA915 /* PoolJob.swift in Sources */,
+				B86A5B3F218CA02C002CA915 /* Hex.swift in Sources */,
+				B8D278AD218D702D00B6F54C /* Pool.swift in Sources */,
+				B8D278AF218DDC6B00B6F54C /* NonceCounter.swift in Sources */,
 				B8A97791217C1E00003FBA72 /* Stratum.swift in Sources */,
+				B86A5B3D218C7467002CA915 /* BlockHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

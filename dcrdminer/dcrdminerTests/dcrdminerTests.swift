@@ -2,7 +2,7 @@
 //  dcrdminerTests.swift
 //  dcrdminerTests
 //
-//  Created by 渡部郷太 on 2018/10/20.
+//  Created by Kyota Watanabe on 2018/10/20.
 //  Copyright © 2018 watanabe kyota. All rights reserved.
 //
 

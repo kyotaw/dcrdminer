@@ -2,20 +2,20 @@
 //  Stream.swift
 //  dcrdminer
 //
-//  Created by 渡部郷太 on 2018/10/21.
+//  Created by Kyota Watanabe on 2018/10/21.
 //  Copyright © 2018 watanabe kyota. All rights reserved.
-///Users/kyota/work/ZaifSwift/ZaifSwift/Resource.swift
+//
 
 import Foundation
 import SwiftyJSON
 
 protocol StratumDelegate {
-    func receiveMessage(message: SubscriveResult)
+    func receiveMessage(message: SubscribeResult)
     func receiveMessage(message: NotifyMethod)
     func receiveMessage(message: SetDifficultyMethod)
 }
 
-public struct SubscriveResult : Decodable {
+public struct SubscribeResult : Decodable {
     init?(json: JSON) {
         guard let id = json["id"].int else {
             return nil
@@ -36,21 +36,21 @@ public struct SubscriveResult : Decodable {
             return nil
         }
         
-        guard let extranonce1 = resultArray[1].string else {
+        guard let extraNonce1 = resultArray[1].string else {
             return nil
         }
-        self.extranonce1 = extranonce1
+        self.extraNonce1 = extraNonce1
         
-        guard let extranonce2Size = resultArray[2].int else {
+        guard let extraNonce2Length = resultArray[2].int else {
             return nil
         }
-        self.extranonce2Size = extranonce2Size
+        self.extraNonce2Length = extraNonce2Length
     }
     
     var id: Int
     var subscribeId: String
-    var extranonce1: String
-    var extranonce2Size: Int
+    var extraNonce1: String
+    var extraNonce2Length: Int
 }
 
 public struct NotifyMethod {
@@ -72,15 +72,15 @@ public struct NotifyMethod {
         }
         self.prevBlockHash = prevHash
         
-        guard let genTx1 = params[2].string else {
+        guard let coinb1 = params[2].string else {
             return nil
         }
-        self.genTx1 = genTx1
+        self.coinb1 = coinb1
         
-        guard let genTx2 = params[3].string else {
+        guard let coinb2 = params[3].string else {
             return nil
         }
-        self.genTx2 = genTx2
+        self.coinb2 = coinb2
         
         guard let merkleBranches = params[4].array else {
             return nil
@@ -92,15 +92,15 @@ public struct NotifyMethod {
         }
         self.blockVersion = blockVersion
         
-        guard let nBits = params[6].string else {
+        guard let nbits = params[6].string else {
             return nil
         }
-        self.nBits = nBits
+        self.nbits = nbits
         
-        guard let nTime = params[7].string else {
+        guard let ntime = params[7].string else {
             return nil
         }
-        self.nTime = nTime
+        self.ntime = ntime
         
         guard let isCleanJob = params[8].bool else {
             return nil
@@ -111,12 +111,12 @@ public struct NotifyMethod {
     var id: Int?
     var jobId: String
     var prevBlockHash: String
-    var genTx1: String
-    var genTx2: String
+    var coinb1: String
+    var coinb2: String
     var merkleBranches: [String]
     var blockVersion: String
-    var nBits: String
-    var nTime: String
+    var nbits: String
+    var ntime: String
     var isCleanJob: Bool
 }
 
@@ -129,33 +129,36 @@ public struct SetDifficultyMethod {
         guard let params = json["params"].array else {
             return nil
         }
-        guard let difficulty = params[0].float else {
+        guard let difficulty = params[0].int64 else {
             return nil
         }
         self.difficulty = difficulty
     }
     
     var id: Int?
-    var difficulty: Float
+    var difficulty: Int64
 }
 
-open class Stratum : NSObject, StreamDelegate {
+class Stratum : NSObject, StreamDelegate {
     
-    init(host: String, port: Int, delegate: StratumDelegate) {
+    init(host: String, port: Int) {
         self.host = host
         self.port = port
-        self.delegate = delegate
         super.init()
         Stream.getStreamsToHost(withName: host, port: port, inputStream: &self.inStream, outputStream: &self.outStream)
         self.outStream?.delegate = self
         self.inStream?.delegate = self
         self.outStream?.schedule(in: .main, forMode: RunLoop.Mode.common)
-        self.outStream?.open()
         self.inStream?.schedule(in: .main, forMode: RunLoop.Mode.common)
+    }
+    
+    func subscribe(subscriber: StratumDelegate) {
+        self.delegate = subscriber
+        self.outStream?.open()
         self.inStream?.open()
     }
     
-    open func subscribe() {
+    private func subscribe() {
         let data: [String:Any] = [
             "id": 1,
             "method": "mining.subscribe",
@@ -185,7 +188,6 @@ open class Stratum : NSObject, StreamDelegate {
             print("<Error occurred>")
         case Stream.Event.openCompleted:
             self.status = .connected
-            print("<Error occurred>")
         case Stream.Event.hasSpaceAvailable:
             if self.status == .connected {
                 self.subscribe()
@@ -216,11 +218,11 @@ open class Stratum : NSObject, StreamDelegate {
     private func dispachMessage(message: String) {
         let json = JSON(parseJSON: message)
         if json["result"].array != nil{
-            guard let subscribeResult = SubscriveResult(json: json) else {
+            guard let subscribeResult = SubscribeResult(json: json) else {
                 print("Failed to parse SubscribeResult")
                 return
             }
-            self.delegate.receiveMessage(message: subscribeResult)
+            self.delegate?.receiveMessage(message: subscribeResult)
         } else if let method = json["method"].string {
             switch method {
             case "mining.notify":
@@ -228,13 +230,13 @@ open class Stratum : NSObject, StreamDelegate {
                     print("Failed to parse NotifyMethod")
                     return
                 }
-                self.delegate.receiveMessage(message: notifyMethod)
+                self.delegate?.receiveMessage(message: notifyMethod)
             case "mining.set_difficulty":
                 guard let setDifficultyMethod = SetDifficultyMethod(json: json) else {
                     print("Failed to parse SetDifficultyMethod")
                     return
                 }
-                self.delegate.receiveMessage(message: setDifficultyMethod)
+                self.delegate?.receiveMessage(message: setDifficultyMethod)
             default:
                 print("Unknown message: " + method)
             }
@@ -244,7 +246,7 @@ open class Stratum : NSObject, StreamDelegate {
     
     private let host: String
     private let port : Int
-    private let delegate: StratumDelegate
+    private var delegate: StratumDelegate?
     private var inStream: InputStream? = nil
     private var outStream: OutputStream? = nil
     private var status: StratumState = .disConnected
