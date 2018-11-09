@@ -10,10 +10,10 @@ import Foundation
 
 class BlockHeader {
     init(notifyMethod: NotifyMethod, subscribeResult: SubscribeResult) {
-        let padSize = BlockHeader.extraDataBytes - (Hex(hexStr: subscribeResult.extraNonce1).bytes!.count + subscribeResult.extraNonce2Length)
+        let padSize = BlockHeader.extraDataBytes - (Hex(hexStr: subscribeResult.extraNonce1).bytes.count + subscribeResult.extraNonce2Length)
         let extraData = subscribeResult.extraNonce1 + Hex(size: subscribeResult.extraNonce2Length + padSize).str
         let header = notifyMethod.blockVersion + notifyMethod.prevBlockHash + notifyMethod.coinb1 + extraData + notifyMethod.coinb2
-        self.bytes = Hex(hexStr: header).bytes!
+        self.bytes = Hex(hexStr: header).bytes
     }
     
     init(bytes: [UInt8]) {

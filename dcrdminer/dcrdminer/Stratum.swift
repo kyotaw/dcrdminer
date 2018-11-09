@@ -129,14 +129,14 @@ public struct SetDifficultyMethod {
         guard let params = json["params"].array else {
             return nil
         }
-        guard let difficulty = params[0].int64 else {
+        guard let difficulty = params[0].int else {
             return nil
         }
         self.difficulty = difficulty
     }
     
     var id: Int?
-    var difficulty: Int64
+    var difficulty: Int
 }
 
 class Stratum : NSObject, StreamDelegate {

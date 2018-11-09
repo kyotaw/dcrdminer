@@ -10,37 +10,48 @@ import Foundation
 
 class Hex {
     init(hexStr: String) {
-        self.hexStr = hexStr
+        self._hexStr = hexStr
+        self._bytes = [UInt8]()
+        self._bytes = self.hexStrToBytes(hexStr: hexStr)
     }
     
     init(size: Int) {
-        self.hexStr = String(repeating: "00", count: size)
+        self._hexStr = String(repeating: "00", count: size)
+        self._bytes = [UInt8]()
+        self._bytes = self.hexStrToBytes(hexStr: self._hexStr)
+    }
+    
+    init(num: UInt32) {
+        self._hexStr = String(format: "%02x", num)
+        self._bytes = [UInt8]()
+        self._bytes = self.hexStrToBytes(hexStr: self._hexStr )
     }
     
     var str: String {
-        get { return self.hexStr }
+        return self._hexStr
     }
     
-    lazy var bytes: [UInt8]? = {
-        let bytesCount = self.hexStr.count / 2
+    var bytes: [UInt8] {
+        return self._bytes
+    }
+    
+    private func hexStrToBytes(hexStr: String) -> [UInt8] {
+        let bytesCount = hexStr.count / 2
         var bytes = [UInt8]()
         bytes.reserveCapacity(bytesCount)
-        var index = self.hexStr.startIndex
+        var index = hexStr.startIndex
         for _ in 0 ..< bytesCount {
-            let nextIndex = self.hexStr.index(index, offsetBy: 2)
-            if let b = UInt8(self.hexStr[index..<nextIndex], radix: 16) {
+            let nextIndex = hexStr.index(index, offsetBy: 2)
+            if let b = UInt8(hexStr[index..<nextIndex], radix: 16) {
                 bytes.append(b)
             } else {
-                return nil
+                return []
             }
             index = nextIndex
         }
         return bytes
-    }()
-    
-    private func hexStrToBytes(hexStr: String) {
-        
     }
     
-    private let hexStr: String
+    private var _hexStr: String
+    private var _bytes: [UInt8]
 }

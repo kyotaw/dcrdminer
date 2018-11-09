@@ -27,7 +27,22 @@ class ViewController: UIViewController, PoolDelegate, MinerDelegate {
         self.miner.mineHash(job: job)
     }
     
+    // MinerDelegate
+    func foundNonce(nonce: UInt32, extraNonce: UInt32, hash: String, job: PoolJob) {
+        self.hashLabel.text = hash
+        print("Nonce: " + Hex(num: nonce).str)
+        print("ExtraNonce: " + Hex(num: extraNonce).str)
+    }
+    
+    func receiveHashRate(hashRate: Float) {
+        DispatchQueue.main.async {
+            self.hashRateLabel.text = hashRate.description
+        }
+    }
+    
     var pool: Pool!
     var miner: Miner!
+    @IBOutlet weak var hashRateLabel: UILabel!
+    @IBOutlet weak var hashLabel: UILabel!
 }
 
